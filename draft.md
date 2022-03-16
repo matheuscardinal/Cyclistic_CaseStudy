@@ -49,8 +49,9 @@ To make sure we won't have any trouble when uploading our data into my database,
 ![yyyy-mm-dd-resized](https://user-images.githubusercontent.com/101608594/158520703-9e08c387-ce3d-4ac6-bb68-33e279ec687f.png)
 ![yyyy-mm-dd-2-resized](https://user-images.githubusercontent.com/101608594/158520697-6db38c97-d969-4274-b048-b0f2a9c71b8a.png)
 
-And may as well create new columns into our datasets to make my future 'me' happier because we will have columns ready to perform some calculations and analisys.
-A column named as 'ride_length_seconds' and a second new-column named as 'day_of_week'. 
+### New columns
+
+To get more in-depth insights, I may as well create new columns into our datasets, having columns ready to perform calculations and analisys focused on the business tasks. A column named as 'ride_length_seconds' and a second new-column named as 'day_of_week'. 
 
 #### 1. 'ride_length_seconds'
 ![RIDE_LENGTH_SECONDS](https://user-images.githubusercontent.com/101608594/158522164-9379d60f-38a2-4da2-82cb-b5805ad97c30.gif)
@@ -62,6 +63,23 @@ The result returns with decimals, so to get some more consistency on my analysis
 ![RIDE_LENGTH_SECONDS_2](https://user-images.githubusercontent.com/101608594/158523900-11ce93c9-f5b9-4700-9838-965cafd19118.gif)
 
 #### 2. 'day_of_week'
+
+Syntax:
+
+=WEEKDAY(*serial_number*, [return type])
+
+The 'serial_number' is a sequential number that represents the date of the day you are trying to find, *bingo* column C.
+I used return_type '1' which is '1' for 'Sunday' through '7' for 'Saturday'.
+
+![DAY-OF-WEEK](https://user-images.githubusercontent.com/101608594/158531145-080a346a-3ca8-40c0-b38c-17a55fe509b7.gif)
+
+### Uploading the data into the database (PostgreSQL)
+
+If you haven't leaped over any step above you won't have to spend 14 hours like me to create a one destination table onto your database for further analysis, because all our dataset is consistenly formated to be uploaded onto the respectives datatypes:
+
+
+
+
 
 
 
