@@ -49,6 +49,8 @@ To complete our study in order to identify trends and build a beautiful marketin
 
 The dataset provided is compounded by 12 '.csv' files for each month of 2021, and is located on the [company's cloud](https://divvy-tripdata.s3.amazonaws.com/index.html) (Amazon Web Services). Each table contains 13 columns and each row consists of a single ride records.
 
+*The dataset has been made available by Motivate International Inc., under this [data license agreement](https://ride.divvybikes.com/data-license-agreement). Note that data-privacy issues prohibit you from using riders’ personally identifiable information. This means that I won’t be able to connect pass purchases to credit card numbers to determine if casual riders live in the Cyclistic service area or if they have purchased multiple single passes.
+
 ![csv files](https://user-images.githubusercontent.com/101608594/158493930-72b0d12f-ec89-47b4-bee3-4fc4f953ab7f.png)
 
 
@@ -159,7 +161,9 @@ Yes, you can query it! I didn't know either, hey! Haha
 
 BEAUTIFUL!
 
-## Phase 3 - PROCESS:
+## Phase 3 - PROCESS: Data Cleaning
+
+
 
 
 
