@@ -75,15 +75,64 @@ I used return_type '1' which is '1' for 'Sunday' through '7' for 'Saturday'.
 
 ### Uploading the data into the database (PostgreSQL)
 
+*Download PostgreSQL: [Link](https://www.postgresql.org/download/)*
+*Documentation: [Link](https://www.postgresql.org/docs/14/index.html)(Fantastic software, very intuitive, if you are curious you will be able to easily get it set)*
+
 If you haven't leaped over any step above you won't have to spend 14 hours like me to create a one destination table onto your database for further analysis, because all our dataset is consistenly formated to be uploaded onto the respectives datatypes:
 
+*ride_id:CHARACTER VARYING,* 
 
+*rideable_type:CHARACTER VARYING,* 
 
+*started_at:TIMESTAMP WITHOUT TIME ZONE,* 
 
+*ended_at:TIMESTAMP WITHOUT TIME ZONE,* 
 
+*start_station_name:CHARACTER VARYING,* 
 
+*start_station_id:CHARACTER VARYING,* 
 
+*end_station_name:CHARACTER VARYING,* 
 
+*end_station_id:CHARACTER VARYING,* 
+
+*start_lat:NUMERIC,* 
+
+*start_lng:NUMERIC,* 
+
+*end_lat:NUMERIC,* 
+
+*end_lng:NUMERIC,* 
+
+*member_casual:CHARACTER VARYING,* 
+
+*ride_length_seconds:INTEGER,* 
+
+*day_of_week:INTEGER* 
+
+#### Table summary
+
+✨ Now, we have our table uploaded and ready to be used! ✨
+
+Let's check if the data was correctly uploaded:
+
+##### A - Data types
+
+Yes, you can query it! I didn't know either, hey! Haha
+
+![data-types-glimpse](https://user-images.githubusercontent.com/101608594/158542985-c01fd458-d894-41f2-90f2-5496cc73ee95.png)
+
+*Extra: Query syntax explanation*
+
+![data-type-query-syntax](https://user-images.githubusercontent.com/101608594/158544361-415b9a8c-a45e-4ae9-8123-7988a024549e.png)
+
+#### B - Number of rows
+
+![Count](https://user-images.githubusercontent.com/101608594/158545269-83aaaf0e-4027-4ec0-a563-229281bfef4d.png)
+
+BEAUTIFUL!
+
+## Phase 3 - PROCESS:
 
 
 
