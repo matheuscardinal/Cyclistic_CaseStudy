@@ -120,7 +120,7 @@ Let's check if the data was correctly uploaded:
 
 Yes, you can query it! I didn't know either, hey! Haha
 
-![data-types-glimpse](https://user-images.githubusercontent.com/101608594/158542985-c01fd458-d894-41f2-90f2-5496cc73ee95.png)
+![data-types-zoomed](https://user-images.githubusercontent.com/101608594/158545698-e9da2970-ec78-4167-a558-31c0f960be1c.png)
 
 *Extra: Query syntax explanation*
 
