@@ -15,4 +15,7 @@
 #### Day 2 - Created my notebook on GitHub, this one that you are reading right now.
 
 - Step-by-step of Phase 1 'ASK' and Phase 2 'PREPARE'
-- 
+
+#### Day 3 - Trying to filter and analyze the data
+
+- Observation: my first time analysing by myself
