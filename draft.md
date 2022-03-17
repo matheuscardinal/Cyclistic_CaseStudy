@@ -35,7 +35,7 @@ Cyclistic's marketing strategy relied on building general awareness and appealin
 
 (My instincts) In order to do that:
 
-1. Understand how annual members and casual riders differ - I am going to analyze where and when casual riders most use the bikes so we can target those riders with promotions before hand, specially for repetitive member id's.
+1. Understand how annual members and casual riders differ - I am going to analyze where and when casual riders most use the bikes so we can target those riders with promotions before hand, specially for repetitive casual rider id's.
 
 2. What could possibly motivate casual riders to buy a membership?
   - Study the possibility of summer season promotion to convert the casual riders into members.
@@ -159,11 +159,36 @@ Yes, you can query it! I didn't know either, hey! Haha
 
 ![Count](https://user-images.githubusercontent.com/101608594/158545269-83aaaf0e-4027-4ec0-a563-229281bfef4d.png)
 
-BEAUTIFUL!
+BEAUTIFUL! ☜(ﾟヮﾟ☜)
 
 ## Phase 3 - PROCESS: Data Cleaning
 
+Started pulling the data and as I had realised before, because of the different geolocation on latitude e longitude columns, the results 
 
+
+SELECT
+	DISTINCT start_station_id AS station_id
+	,start_station_name AS station_name
+	,ROUND(AVG(start_lat),2) AS avglat
+	,ROUND(AVG(start_lng),2) AS avglng
+FROM
+	cyclistic
+GROUP BY
+	station_name
+	,station_id
+
+UNION DISTINCT
+
+SELECT
+	DISTINCT end_station_id AS station_id
+	,end_station_name AS station_name
+	,ROUND(AVG(end_lat),2) AS avglat
+	,ROUND(AVG(end_lng),2) AS avglng
+FROM
+	cyclistic
+GROUP BY
+	station_name
+	,station_id
 
 
 
