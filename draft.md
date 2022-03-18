@@ -169,7 +169,7 @@ Started pulling the data and as I had realised before, the results are really in
 
 #### FIXING
 
-NOTE: I know, by my analysis, that we need to get to 834 unique station id's.
+NOTE: I know, by my analysis, that we need to get to 833 unique station id's.
 
 To find the duplicates I grouped the 'station_name' and 'station_id' by the AVG latitude and longitude.
 
@@ -333,7 +333,7 @@ SELECT * FROM station ORDER BY station_id
 
 ALMOST THERE!
 
-Now we insert the rest of unique 'station_id' and 'station_name' into our new table and hoping to get my table with 834 unique values to start my analysis, who else is also excited here?
+Now we insert the rest of unique 'station_id' and 'station_name' into our new table and hopE to get my table with 833 unique values to start my analysis, who else is also excited here?
 
 ```pink
 -- INSERTING THE UNIQUE VALUES IN THE SOURCE OF TRUTH TABLE
@@ -389,6 +389,21 @@ WHERE dupes.station_id NOT IN -- CHANGE 'IN' TO 'NOT IN' AND YOU ARE DONE
 'TA1307000041')
 ```
 
+The return was 834 rows.
+
+![5](https://user-images.githubusercontent.com/101608594/158928168-0257ee7a-d16a-440b-a028-7ffbf4e04355.png)
+
+I discovered that there was propably a human error at the 'station_id' for the 'station_name = Loomis St & 89th St' for the exactly same latitude and longitude.
+
+![6](https://user-images.githubusercontent.com/101608594/158928179-698ab56b-292a-4f65-b22b-cf1a9be076cd.png)
+
+Checked it on my table and found out that there is a number '2' missing onto the inserted first values.
+
+I deleted and DONE! ✔
+
+![7](https://user-images.githubusercontent.com/101608594/158928453-88843cbc-0579-45a4-b24b-77624b927a22.png)
+
+### Does my data ROCCC?
 
 
 
