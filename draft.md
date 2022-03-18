@@ -393,15 +393,17 @@ The return was 834 rows.
 
 ![5](https://user-images.githubusercontent.com/101608594/158928168-0257ee7a-d16a-440b-a028-7ffbf4e04355.png)
 
-I discovered that there was propably a human error at the 'station_id' for the 'station_name = Loomis St & 89th St' for the exactly same latitude and longitude.
+I discovered that there was propably a human error at the 'station_id' for the 'station_name = Loomis St & 89th St', that has exactly same latitude and longitude.
 
 ![6](https://user-images.githubusercontent.com/101608594/158928179-698ab56b-292a-4f65-b22b-cf1a9be076cd.png)
 
-Checked it on my table and found out that there is a number '2' missing onto the inserted first values.
+Checked it on my table and found out that there is a number '2' missing onto the inserted first value.
 
-I deleted and DONE! ✔
+I deleted it and DONE! ✔
 
 ![7](https://user-images.githubusercontent.com/101608594/158928453-88843cbc-0579-45a4-b24b-77624b927a22.png)
+
+
 
 ### Does my data ROCCC?
 
