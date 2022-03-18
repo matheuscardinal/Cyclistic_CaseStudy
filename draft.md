@@ -169,6 +169,8 @@ Started pulling the data and as I had realised before, the results are really in
 
 #### FIXING
 
+NOTE: I know, by my analysis, that we need to get to 834 unique station id's.
+
 To find the duplicates I grouped the 'station_name' and 'station_id' by the AVG latitude and longitude.
 
 ![2](https://user-images.githubusercontent.com/101608594/158739201-0cf32820-a175-4108-88df-1067b3fe3fd4.png)
@@ -219,7 +221,7 @@ ORDER BY
 
 ![3](https://user-images.githubusercontent.com/101608594/158740616-8d0d869c-1ec7-45ea-a667-eb53184a1cee.png)
 
-#### Source of Truth!
+### Source of Truth!
 
 Long story short, summary:
 
@@ -227,9 +229,10 @@ Long story short, summary:
 	- First, I inserted only duplicated values
 	- Deleted all the biased values or different station names due different locations 
 	- Updated station_id value duplicated for two different locations
-		*Observation: I checked on the map all the duplicated values and matched by latitude and longitude, so it's correct!*
+		
+*Observation: I checked on the map all the duplicated values and matched by latitude and longitude, so it's correct! Give me credit, please, it was such a time consuming work and I am really happy I am documenting it all.*
 
-_The queries would look like this:_
+#### _The queries would look like this:_
 
 ```purple
 -- SOURCE OF TRUTH
@@ -328,8 +331,63 @@ SELECT * FROM station ORDER BY station_id
 
 ![4](https://user-images.githubusercontent.com/101608594/158923657-031dc601-5de5-4100-8f13-863a0476dcb7.png)
 
+ALMOST THERE!
 
+Now we insert the rest of unique 'station_id' and 'station_name' into our new table and hoping to get my table with 834 unique values to start my analysis, who else is also excited here?
 
+```pink
+-- INSERTING THE UNIQUE VALUES IN THE SOURCE OF TRUTH TABLE
+INSERT INTO station 
+SELECT 
+	dupes.*
+FROM
+(
+		SELECT
+			names.station_id
+			,names.station_name
+			,ROUND(AVG(lat),2) AS lat
+			,ROUND(AVG(lng),2) AS lng
+		FROM
+		(
+				SELECT
+					DISTINCT start_station_name AS station_name
+					,start_station_id AS station_id
+					,start_lat AS lat
+					,start_lng AS lng
+				FROM
+					cyclistic
+				UNION DISTINCT
+				SELECT 
+					DISTINCT end_station_name AS station_name
+					,end_station_id AS station_id
+					,end_lat AS lat
+					,end_lng AS lng
+				FROM
+					cyclistic
+		) AS names
+		GROUP BY
+			names.station_name
+			,names.station_id
+) AS dupes
+WHERE dupes.station_id NOT IN -- CHANGE 'IN' TO 'NOT IN' AND YOU ARE DONE
+('TA1306000029',
+'13300',
+'TA1305000039',
+'351',
+'13074',
+'631',
+'331',
+'LF-005',
+'20215',
+'KA1503000055',
+'KA1504000168',
+'TA1309000039',
+'WL-008',
+'13221',
+'13099',
+'TA1309000049',
+'TA1307000041')
+```
 
 
 
