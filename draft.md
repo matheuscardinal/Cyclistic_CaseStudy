@@ -215,9 +215,119 @@ ORDER BY
 	duplicates DESC
 ```
 
-༼ つ ◕_◕ ༽つ BINGO!
+༼ つ ◕_◕ ༽つ BINGO! 18 duplicates!
 
 ![3](https://user-images.githubusercontent.com/101608594/158740616-8d0d869c-1ec7-45ea-a667-eb53184a1cee.png)
+
+#### Source of Truth!
+
+Long story short, summary:
+
+1. CREATE TABLE NEW TABLE ("source of truth")
+	- First, I inserted only duplicated values
+	- Deleted all the biased values or different station names due different locations 
+	- Updated station_id value duplicated for two different locations
+		*Observation: I checked on the map all the duplicated values and matched by latitude and longitude, so it's correct!*
+
+_The queries would look like this:_
+
+```purple
+-- SOURCE OF TRUTH
+--- CREATE TABLE
+CREATE TABLE station 
+	(station_id CHARACTER VARYING,
+	station_name CHARACTER VARYING,
+	lat NUMERIC,
+	lng NUMERIC)
+-- INSERT INTO
+INSERT INTO station 
+SELECT 
+	dupes.*
+FROM
+(
+		SELECT
+			names.station_id
+			,names.station_name
+			,ROUND(AVG(lat),2) AS lat
+			,ROUND(AVG(lng),2) AS lng
+		FROM
+		(
+				SELECT
+					DISTINCT start_station_name AS station_name
+					,start_station_id AS station_id
+					,start_lat AS lat
+					,start_lng AS lng
+				FROM
+					cyclistic
+				UNION DISTINCT
+				SELECT 
+					DISTINCT end_station_name AS station_name
+					,end_station_id AS station_id
+					,end_lat AS lat
+					,end_lng AS lng
+				FROM
+					cyclistic
+		) AS names
+		GROUP BY
+			names.station_name
+			,names.station_id
+) AS dupes
+WHERE dupes.station_id IN
+('TA1306000029',
+'13300',
+'TA1305000039',
+'351',
+'13074',
+'631',
+'331',
+'LF-005',
+'20215',
+'KA1503000055',
+'KA1504000168',
+'TA1309000039',
+'WL-008',
+'13221',
+'13099',
+'TA1309000049',
+'TA1307000041')
+
+
+---- DELETING ROWS
+DELETE FROM station
+WHERE station_name is null
+--
+DELETE FROM station
+WHERE 1=1
+AND station_name IN ('Broadway & Wilson - Truman College Vaccination Site',
+				'Halsted St & 18th St (Temp)',
+				'DuSable Lake Shore Dr & Monroe St',
+				'351',
+				'Malcolm X College Vaccination Site',
+				'Halsted & 63rd - Kennedy-King Vaccination Site',
+				'Western & 28th - Velasquez Institute Vaccination Site',
+				'DuSable Lake Shore Dr & North Blvd',
+				'DuSable Lake Shore Dr & Diversey Pkwy',
+				'DuSable Lake Shore Dr & Belmont Ave',
+				'DuSable Lake Shore Dr & Ohio St',
+				'DuSable Lake Shore Dr & Wellington Ave',
+				'Lake Shore Dr & Ohio St',
+				'Marshfield Ave & Cortland St')
+				
+				
+-- UPDATING THE STATION ID THAT IS DUPLICATED FOR 2 DIFFERENT LOCATIONS
+UPDATE public.station
+	SET station_id= '331A'
+	WHERE station_name = 'Pulaski Rd & 21st St';
+	
+	
+--
+SELECT * FROM station ORDER BY station_id
+```
+
+#### RESULT:
+
+![4](https://user-images.githubusercontent.com/101608594/158923657-031dc601-5de5-4100-8f13-863a0476dcb7.png)
+
 
 
 
