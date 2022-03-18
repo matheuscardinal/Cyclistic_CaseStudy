@@ -163,32 +163,67 @@ BEAUTIFUL! ☜(ﾟヮﾟ☜)
 
 ## Phase 3 - PROCESS: Data Cleaning
 
-Started pulling the data and as I had realised before, because of the different geolocation on latitude e longitude columns, the results 
+Started pulling the data and as I had realised before, the results are really inconsistent by the amount of duplicates due the different bike geolocations, which also creates a few different 'station names' and 'station id's'.
 
+![1](https://user-images.githubusercontent.com/101608594/158738125-0af07f3e-6387-4eb6-b372-c84203fb7295.png)
 
-SELECT
-	DISTINCT start_station_id AS station_id
-	,start_station_name AS station_name
-	,ROUND(AVG(start_lat),2) AS avglat
-	,ROUND(AVG(start_lng),2) AS avglng
+#### FIXING
+
+To find the duplicates I grouped the 'station_name' and 'station_id' by the AVG latitude and longitude.
+
+![2](https://user-images.githubusercontent.com/101608594/158739201-0cf32820-a175-4108-88df-1067b3fe3fd4.png)
+
+Copied the table on Excel to check how many duplicates I had on my temp table, which was 18 dupes on 'station_id'.
+
+To check, we query:
+```purple
+SELECT 
+	dupes.station_id
+	,COUNT(*) AS duplicates
 FROM
-	cyclistic
-GROUP BY
-	station_name
-	,station_id
+(
+		SELECT
+			names.station_name
+			,names.station_id
+			,ROUND(AVG(lat),2) AS lat
+			,ROUND(AVG(lng),2) AS lng
+		FROM
+		(
+				SELECT
+					DISTINCT start_station_name AS station_name
+					,start_station_id AS station_id
+					,start_lat AS lat
+					,start_lng AS lng
+				FROM
+					cyclistic
+				UNION DISTINCT
+				SELECT 
+					DISTINCT end_station_name AS station_name
+					,end_station_id AS station_id
+					,end_lat AS lat
+					,end_lng AS lng
+				FROM
+					cyclistic
+		) AS names
+		GROUP BY
+			names.station_name
+			,names.station_id
+) AS dupes
+GROUP BY 
+	dupes.station_id
+ORDER BY 
+	duplicates DESC
+```
 
-UNION DISTINCT
+༼ つ ◕_◕ ༽つ BINGO!
 
-SELECT
-	DISTINCT end_station_id AS station_id
-	,end_station_name AS station_name
-	,ROUND(AVG(end_lat),2) AS avglat
-	,ROUND(AVG(end_lng),2) AS avglng
-FROM
-	cyclistic
-GROUP BY
-	station_name
-	,station_id
+![3](https://user-images.githubusercontent.com/101608594/158740616-8d0d869c-1ec7-45ea-a667-eb53184a1cee.png)
+
+
+
+
+
+
 
 
 
