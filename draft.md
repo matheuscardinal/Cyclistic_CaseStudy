@@ -467,6 +467,7 @@ TO 'C:\Users\Matheus Cardinal\Desktop\COURSERA\COURSE 8 - CAPSTONE\Cyclistic\Ana
 ```
 ### Does my data ROCCC?
 
+![member_casual_daily](https://user-images.githubusercontent.com/101608594/159250744-319156fc-b419-46ed-af8c-08912f2d5a6e.png)
 
 
 
