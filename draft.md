@@ -403,43 +403,51 @@ I deleted it and DONE! ✔
 
 ![7](https://user-images.githubusercontent.com/101608594/158928453-88843cbc-0579-45a4-b24b-77624b927a22.png)
 
+```
+-- 108 starts at Pulaski Rd to be changed to 331A
+-- 91 ends at Pulaski Rd to be changed to 331A 
 SELECT 
 	ride_id
-	,member_casual
 	,rideable_type
-	,day_of_week
+	,member_casual
 	,started_at
 	,ended_at
+	,day_of_week
 	,ride_length_seconds
 	,CASE 
 		WHEN start_station_id = '331' AND start_station_name = 'Pulaski Rd & 21st St' 
-		THEN '331A' 
+		THEN '331A'
 		ELSE start_station_id
-	END AS start_station_id2
+	END AS start_station_id
 	,start_station_name
 	,starts.lat AS start_lat
-	,starts.lng AS start_lng 
-	,CASE 
-		WHEN end_station_id = '331' AND end_station_name = 'Pulaski Rd & 21st St' 
-		THEN '331A' 
+	,starts.lng AS start_lng
+	,CASE
+		WHEN end_station_id = '331' AND end_station_name = 'Pulaski Rd & 21st St'
+		THEN '331A'
 		ELSE end_station_id
-	END AS end_station_id2	
+	END AS end_station_id
 	,end_station_name
 	,ends.lat AS end_lat
-	,ends.lng AS end_lng
-FROM cyclistic o
-LEFT JOIN station starts
-	ON 	(CASE 
+	,ends.lng AS end_lat
+FROM cyclistic AS alldata
+LEFT JOIN station AS starts
+	ON (CASE 
 		WHEN start_station_id = '331' AND start_station_name = 'Pulaski Rd & 21st St' 
-		THEN '331A' 
+		THEN '331A'
 		ELSE start_station_id
 		END) = starts.station_id
-LEFT JOIN station ends
-	ON (CASE 
-			WHEN end_station_id = '331' AND end_station_name = 'Pulaski Rd & 21st St' 
-			THEN '331A' 
-			ELSE end_station_id
-			END) = ends.station_id
+LEFT JOIN station AS ends
+	ON (CASE
+		WHEN end_station_id = '331' AND end_station_name = 'Pulaski Rd & 21st St'
+		THEN '331A'
+		ELSE end_station_id
+		END) = ends.station_id
+WHERE 1=1
+AND started_at < ended_at
+AND start_station_id is not null 
+AND end_station_id is not null
+```
 
 ### Does my data ROCCC?
 
