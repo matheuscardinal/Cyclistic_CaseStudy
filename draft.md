@@ -403,7 +403,43 @@ I deleted it and DONE! ✔
 
 ![7](https://user-images.githubusercontent.com/101608594/158928453-88843cbc-0579-45a4-b24b-77624b927a22.png)
 
-
+SELECT 
+	ride_id
+	,member_casual
+	,rideable_type
+	,day_of_week
+	,started_at
+	,ended_at
+	,ride_length_seconds
+	,CASE 
+		WHEN start_station_id = '331' AND start_station_name = 'Pulaski Rd & 21st St' 
+		THEN '331A' 
+		ELSE start_station_id
+	END AS start_station_id2
+	,start_station_name
+	,starts.lat AS start_lat
+	,starts.lng AS start_lng 
+	,CASE 
+		WHEN end_station_id = '331' AND end_station_name = 'Pulaski Rd & 21st St' 
+		THEN '331A' 
+		ELSE end_station_id
+	END AS end_station_id2	
+	,end_station_name
+	,ends.lat AS end_lat
+	,ends.lng AS end_lng
+FROM cyclistic o
+LEFT JOIN station starts
+	ON 	(CASE 
+		WHEN start_station_id = '331' AND start_station_name = 'Pulaski Rd & 21st St' 
+		THEN '331A' 
+		ELSE start_station_id
+		END) = starts.station_id
+LEFT JOIN station ends
+	ON (CASE 
+			WHEN end_station_id = '331' AND end_station_name = 'Pulaski Rd & 21st St' 
+			THEN '331A' 
+			ELSE end_station_id
+			END) = ends.station_id
 
 ### Does my data ROCCC?
 
