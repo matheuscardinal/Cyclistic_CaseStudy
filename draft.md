@@ -184,32 +184,32 @@ SELECT
 	,COUNT(*) AS duplicates
 FROM
 (
+	SELECT
+		names.station_name
+		,names.station_id
+		,ROUND(AVG(lat),2) AS lat
+		,ROUND(AVG(lng),2) AS lng
+	FROM
+	(
 		SELECT
-			names.station_name
-			,names.station_id
-			,ROUND(AVG(lat),2) AS lat
-			,ROUND(AVG(lng),2) AS lng
+			DISTINCT start_station_name AS station_name
+			,start_station_id AS station_id
+			,start_lat AS lat
+			,start_lng AS lng
 		FROM
-		(
-				SELECT
-					DISTINCT start_station_name AS station_name
-					,start_station_id AS station_id
-					,start_lat AS lat
-					,start_lng AS lng
-				FROM
-					cyclistic
-				UNION DISTINCT
-				SELECT 
-					DISTINCT end_station_name AS station_name
-					,end_station_id AS station_id
-					,end_lat AS lat
-					,end_lng AS lng
-				FROM
-					cyclistic
-		) AS names
-		GROUP BY
-			names.station_name
-			,names.station_id
+			cyclistic
+		UNION DISTINCT
+		SELECT 
+			DISTINCT end_station_name AS station_name
+			,end_station_id AS station_id
+			,end_lat AS lat
+			,end_lng AS lng
+		FROM
+			cyclistic
+	) AS names
+	GROUP BY
+		names.station_name
+		,names.station_id
 ) AS dupes
 GROUP BY 
 	dupes.station_id
@@ -248,32 +248,32 @@ SELECT
 	dupes.*
 FROM
 (
-		SELECT
-			names.station_id
-			,names.station_name
-			,ROUND(AVG(lat),2) AS lat
-			,ROUND(AVG(lng),2) AS lng
-		FROM
-		(
-				SELECT
-					DISTINCT start_station_name AS station_name
-					,start_station_id AS station_id
-					,start_lat AS lat
-					,start_lng AS lng
-				FROM
-					cyclistic
-				UNION DISTINCT
-				SELECT 
-					DISTINCT end_station_name AS station_name
-					,end_station_id AS station_id
-					,end_lat AS lat
-					,end_lng AS lng
-				FROM
-					cyclistic
-		) AS names
-		GROUP BY
-			names.station_name
-			,names.station_id
+	SELECT
+		names.station_id
+		,names.station_name
+		,ROUND(AVG(lat),2) AS lat
+		,ROUND(AVG(lng),2) AS lng
+	FROM
+	(
+			SELECT
+				DISTINCT start_station_name AS station_name
+				,start_station_id AS station_id
+				,start_lat AS lat
+				,start_lng AS lng
+			FROM
+				cyclistic
+			UNION DISTINCT
+			SELECT 
+				DISTINCT end_station_name AS station_name
+				,end_station_id AS station_id
+				,end_lat AS lat
+				,end_lng AS lng
+			FROM
+				cyclistic
+	) AS names
+	GROUP BY
+		names.station_name
+		,names.station_id
 ) AS dupes
 WHERE dupes.station_id IN
 ('TA1306000029',
@@ -342,32 +342,32 @@ SELECT
 	dupes.*
 FROM
 (
-		SELECT
-			names.station_id
-			,names.station_name
-			,ROUND(AVG(lat),2) AS lat
-			,ROUND(AVG(lng),2) AS lng
-		FROM
-		(
-				SELECT
-					DISTINCT start_station_name AS station_name
-					,start_station_id AS station_id
-					,start_lat AS lat
-					,start_lng AS lng
-				FROM
-					cyclistic
-				UNION DISTINCT
-				SELECT 
-					DISTINCT end_station_name AS station_name
-					,end_station_id AS station_id
-					,end_lat AS lat
-					,end_lng AS lng
-				FROM
-					cyclistic
-		) AS names
-		GROUP BY
-			names.station_name
-			,names.station_id
+	SELECT
+		names.station_id
+		,names.station_name
+		,ROUND(AVG(lat),2) AS lat
+		,ROUND(AVG(lng),2) AS lng
+	FROM
+	(
+			SELECT
+				DISTINCT start_station_name AS station_name
+				,start_station_id AS station_id
+				,start_lat AS lat
+				,start_lng AS lng
+			FROM
+				cyclistic
+			UNION DISTINCT
+			SELECT 
+				DISTINCT end_station_name AS station_name
+				,end_station_id AS station_id
+				,end_lat AS lat
+				,end_lng AS lng
+			FROM
+				cyclistic
+	) AS names
+	GROUP BY
+		names.station_name
+		,names.station_id
 ) AS dupes
 WHERE dupes.station_id NOT IN -- CHANGE 'IN' TO 'NOT IN' AND YOU ARE DONE
 ('TA1306000029',
@@ -402,6 +402,9 @@ Checked it on my table and found out that there is a number '2' missing onto the
 I deleted it and DONE! ✔
 
 ![7](https://user-images.githubusercontent.com/101608594/158928453-88843cbc-0579-45a4-b24b-77624b927a22.png)
+
+
+
 
 ```
 -- 108 starts at Pulaski Rd to be changed to 331A
@@ -449,6 +452,19 @@ AND start_station_id is not null
 AND end_station_id is not null
 ```
 
+```
+COPY (SELECT
+	DATE(started_at) AS started_date
+	,member_casual
+	,COUNT(*)
+FROM cyclistic2
+GROUP BY
+	member_casual
+	,started_date
+ORDER BY
+	started_date)
+TO 'C:\Users\Matheus Cardinal\Desktop\COURSERA\COURSE 8 - CAPSTONE\Cyclistic\Analysis Tableau\member_casual_daily.csv' DELIMITER ',' CSV HEADER
+```
 ### Does my data ROCCC?
 
 
