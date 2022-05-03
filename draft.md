@@ -175,7 +175,7 @@ To find the duplicates I grouped the 'station_name' and 'station_id' by the AVG 
 
 ![2](https://user-images.githubusercontent.com/101608594/158739201-0cf32820-a175-4108-88df-1067b3fe3fd4.png)
 
-Copied the table on Excel to check how many duplicates I had on my temp table, which was 18 dupes on 'station_id'.
+Copied the table on Excel to check how many duplicates I had on my temp table, which was 19 dupes on 'station_id'.
 
 To check, we query:
 ```purple
@@ -217,7 +217,7 @@ ORDER BY
 	duplicates DESC
 ```
 
-༼ つ ◕_◕ ༽つ BINGO! 18 duplicates!
+༼ つ ◕_◕ ༽つ BINGO! 19 duplicates!
 
 ![3](https://user-images.githubusercontent.com/101608594/158740616-8d0d869c-1ec7-45ea-a667-eb53184a1cee.png)
 
